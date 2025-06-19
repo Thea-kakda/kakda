@@ -9,39 +9,13 @@ let nodes = [];
 const maxLines = 120;
 const maxNodes = 50;
 
-const tl = gsap.timeline({ repeat: -1, repeatRefresh: true });
-
-const split = new SplitText(".quote", { type: "chars, words" });
-const chars = split.chars;
-// Navbar hover functionality
-       document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-
-    // បើក/បិទម៉ឺនុយពេលចុចលើ hamburger
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('show');
-    });
-
-    // បិទម៉ឺនុយពេលចុចលើ link
-    navMenu.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('show');
-        });
-    });
-});
-//mouseleave
-/*
+// Navbar functionality
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
-    hamburger.addEventListener('mouseenter', () => {
-        navMenu.classList.add('show');
-    });
-
-    navMenu.addEventListener('mouseleave', () => {
-        navMenu.classList.remove('show');
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
     });
 
     navMenu.querySelectorAll('.nav-link').forEach(link => {
@@ -51,27 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-*/
-
-// Step 1: Set random color for each character
-tl.set(chars, {
-  color: () => gsap.utils.random([ "#00FFFF",])
-}, 0);
-//"#39FF14",, "#FF3131", "#FF00FF", "#FFD700", "#FF6EC7"
-// Step 2: Fade in characters with stagger
-tl.fromTo(chars, { opacity: 0 }, {
-  opacity: 1,
-  duration: 0.1,
-  stagger: 0.1
-});
-
-// Step 3: Fade out characters with stagger
-tl.to(chars, {
-  duration: 0.5,
-  opacity: 0,
-  stagger: 0.05,
-  ease: "power4.inOut"
-});
+// CircuitLine class for canvas animation
 class CircuitLine {
     constructor() {
         this.x1 = Math.random() * canvas.width;
@@ -110,6 +64,7 @@ class CircuitLine {
     }
 }
 
+// CircuitNode class for canvas animation
 class CircuitNode {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -146,6 +101,7 @@ class CircuitNode {
     }
 }
 
+// Initialize canvas elements
 function init() {
     lines = [];
     nodes = [];
@@ -157,6 +113,7 @@ function init() {
     }
 }
 
+// Animate canvas
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     lines.forEach(line => {
@@ -170,35 +127,45 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+// Handle window resize
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     init();
 });
- document.getElementById('contactForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const message = document.getElementById('message').value;
-        const telegramMessage = 
-        `📨 *New Contact Message* %0A------------------%0A👤 *Name:* ${name}%0A📧 *Email:* ${email}%0A📱 *Phone:* ${phone}%0A📝 *Message:* ${message}`;
-        const botToken = '8035101574:AAGDlpGQ0EPtsStnlLEvzsscD_uje-D_3Fo'; // 👉 ដាក់ Bot Token
-        const chatId = '7834836279';     // 👉 ដាក់ Chat ID
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${telegramMessage}&parse_mode=Markdown`;
-      try {
-        const response = await fetch(url);
-        if (response.ok) {
-          alert("✅ Message sent to Telegram successfully!");
-          document.getElementById('contactForm').reset();
-        } else {
-          alert("❌ Failed to send message.");
-        }
-      } catch (error) {
-        alert("🚨 Error: " + error.message);
-      }
-    });
-
+// Start animations
 init();
 animate();
+// Contact form submission to Telegram
+document.getElementById('contactForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const message = document.getElementById('message').value;
+  const loading = document.getElementById('loading');
+  loading.style.display = 'block';
+
+  // ⚠️ បញ្ចូល BOT TOKEN & CHAT ID របស់អ្នក
+  const botToken = '8035101574:AAGDlpGQ0EPtsStnlLEvzsscD_uje-D_3Fo';
+  const chatId = '7834836279';
+
+  const telegramMessage = `📨 *New Message* %0A------------------%0A👤 *Name:* ${name}%0A📧 *Email:* ${email}%0A📱 *Phone:* ${phone}%0A📝 *Message:* ${message}`;
+
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${telegramMessage}&parse_mode=Markdown`;
+
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      alert("✅ Message sent to Telegram successfully!");
+      document.getElementById('contactForm').reset();
+    } else {
+      alert("❌ Failed to send message.");
+    }
+  } catch (error) {
+    alert("🚨 Error: " + error.message);
+  } finally {
+    loading.style.display = 'none';
+  }
+});
