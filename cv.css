@@ -129,16 +129,6 @@ nav ul li a:hover {
     }   
 }
 
-section {
-    padding: 4rem 5%;
-}
-
-h2 {
-    font-size: 2.5rem;
-    color: #00aaff;
-    margin-bottom: 2rem;
-    text-align: center;
-}
 
 .about-content, .skills-content, .education-content, .projects-content {
     display: flex;
@@ -184,6 +174,17 @@ h2 {
     border-radius: 8px;
 }
 
+section {
+    padding: 4rem 5%;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #00aaff;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
 #contactForm {
     display: flex;
     flex-direction: column;
@@ -218,6 +219,7 @@ h2 {
     background: #0088cc;
 }
 
+
 footer {
     text-align: center;
     padding: 1rem 0;
@@ -225,11 +227,11 @@ footer {
 }
 
 /* Responsive adjustments */
-@media (max-width: 770px) {
+@media (max-width: 768px) {
     .hamburger {
-    display: block;
+        display: block;
     }
-
+    
     nav ul {
         display: none;
         flex-direction: column;
@@ -241,11 +243,11 @@ footer {
         padding: 1rem 0;
         z-index: 1000;
     }
-
+    
     nav ul.show {
         display: flex;
-   }
-
+    }
+    
     nav ul li {
         margin: 0.5rem 0;
         text-align: center;
