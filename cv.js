@@ -9,15 +9,21 @@ let nodes = [];
 const maxLines = 120;
 const maxNodes = 50;
 
-// Navbar functionality
-document.addEventListener('DOMContentLoaded', () => {
+const tl = gsap.timeline({ repeat: -1, repeatRefresh: true });
+
+const split = new SplitText(".quote", { type: "chars, words" });
+const chars = split.chars;
+// Navbar hover functionality
+       document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
+    // បើក/បិទម៉ឺនុយពេលចុចលើ hamburger
     hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('show');
     });
 
+    // បិទម៉ឺនុយពេលចុចលើ link
     navMenu.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('show');
@@ -25,7 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// CircuitLine class for canvas animation
+// Step 1: Set random color for each character
+tl.set(chars, {
+  color: () => gsap.utils.random([ "#00FFFF",])
+}, 0);
+
+// Step 2: Fade in characters with stagger
+tl.fromTo(chars, { opacity: 0 }, {
+  opacity: 1,
+  duration: 0.1,
+  stagger: 0.1
+});
+
+// Step 3: Fade out characters with stagger
+tl.to(chars, {
+  duration: 0.5,
+  opacity: 0,
+  stagger: 0.05,
+  ease: "power4.inOut"
+});
 class CircuitLine {
     constructor() {
         this.x1 = Math.random() * canvas.width;
@@ -64,7 +88,6 @@ class CircuitLine {
     }
 }
 
-// CircuitNode class for canvas animation
 class CircuitNode {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -101,7 +124,6 @@ class CircuitNode {
     }
 }
 
-// Initialize canvas elements
 function init() {
     lines = [];
     nodes = [];
@@ -113,7 +135,6 @@ function init() {
     }
 }
 
-// Animate canvas
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     lines.forEach(line => {
@@ -127,13 +148,12 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Handle window resize
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     init();
 });
-// Start animations
+
 init();
 animate();
 // Contact form submission to Telegram
