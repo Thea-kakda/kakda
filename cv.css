@@ -6,7 +6,7 @@ body {
     color: #ffffff;
     line-height: 1.6;
     position: relative;
-    letter-spacing:2px;
+    letter-spacing: 2px;
 }
 
 #circuitCanvas {
@@ -25,15 +25,17 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensure header stays above other content */
+    z-index: 1000;
 }
+
 .quote {
-      font-size: 7vw;
-      font-weight: bold;
-      text-align: center;
-      color: white;
-      line-height: 1.2;
+    font-size: 7vw;
+    font-weight: bold;
+    text-align: center;
+    color: #00aaff;
+    line-height: 1.2;
 }
+
 nav {
     background: #0000004b;
     height: 8%;
@@ -62,18 +64,19 @@ nav ul {
 }
 
 nav ul li a {
-   color: #ffffff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s, background-color 0.3s;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s, background-color 0.3s;
 }
 
 nav ul li a:hover {
-            color: #00aaff;
-            background-color: rgba(0, 170, 255, 0.1);
-            border-radius: 5px;
+    color: #00aaff;
+    background-color: rgba(0, 170, 255, 0.1);
+    border-radius: 5px;
 }
+
 .hamburger {
     display: none;
     font-size: 2rem;
@@ -82,30 +85,13 @@ nav ul li a:hover {
     z-index: 1001;
 }
 
-
 .hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5rem 5%;
     min-height: 80vh;
-    margin-top: 80px; /* Add margin to prevent content from being hidden under fixed header */
-}
-
-.hero-text h1 {
-    font-size: 3rem;
-    color: #00aaff;
-}
-
-.hero-text p {
-    font-size: 1.5rem;
-    color: #b0b0b0;
-}
-
-.hero-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 80px;
 }
 
 .hero-image .profile-img {
@@ -120,15 +106,24 @@ nav ul li a:hover {
 @keyframes glow {
     from {
         border-color: #6db8ff7c;
-        box-shadow:  0 0 5px #3549fd;
-        transition: 5s;
+        box-shadow: 0 0 5px #3549fd;
     }
     to {
         border-color: #245db362;
         box-shadow: 0 0 10px;
-    }   
+    }
 }
 
+section {
+    padding: 4rem 5%;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #00aaff;
+    margin-bottom: 2rem;
+    text-align: center;
+}
 
 .about-content, .skills-content, .education-content, .projects-content {
     display: flex;
@@ -174,17 +169,6 @@ nav ul li a:hover {
     border-radius: 8px;
 }
 
-section {
-    padding: 4rem 5%;
-}
-
-h2 {
-    font-size: 2.5rem;
-    color: #00aaff;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
 #contactForm {
     display: flex;
     flex-direction: column;
@@ -219,19 +203,17 @@ h2 {
     background: #0088cc;
 }
 
-
 footer {
     text-align: center;
     padding: 1rem 0;
     background: #25293a;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 770px) {
     .hamburger {
         display: block;
     }
-    
+
     nav ul {
         display: none;
         flex-direction: column;
@@ -243,37 +225,30 @@ footer {
         padding: 1rem 0;
         z-index: 1000;
     }
-    
+
     nav ul.show {
         display: flex;
     }
-    
+
     nav ul li {
         margin: 0.5rem 0;
         text-align: center;
     }
-    nav  {
+
+    nav {
         margin-top: -12px;
     }
-    
+
     .hero {
         flex-direction: column;
         text-align: center;
         padding: 3rem 5%;
-        margin-top: 60px; /* Adjust margin for smaller screens */
+        margin-top: 60px;
     }
 
     .hero-image .profile-img {
         width: 200px;
         height: 200px;
         border: 5px solid #00aaff;
-    }
-
-    .hero-text h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-text p {
-        font-size: 1.2rem;
     }
 }
