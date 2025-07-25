@@ -208,6 +208,14 @@ footer {
     padding: 1rem 0;
     background: #25293a;
 }
+.project-img img {  
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    width:100% ;
+    height: 200px;
+
+}
 
 @media (max-width: 770px) {
     .hamburger {
